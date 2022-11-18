@@ -1,7 +1,9 @@
 import torch
 
+from base import Model
 
-class LinearRegression:
+
+class LinearRegression(Model):
 
     def __init__(self):
         self.w = None
@@ -36,8 +38,9 @@ class LinearRegression:
 
     def evaluate(self, X, y):
         y_pred = self.predict(X)
-        
+
         return torch.sum((y_pred - y)**2) / len(y)
+
 
 if __name__ == "__main__":
     regressor = LinearRegression()
