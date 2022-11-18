@@ -5,6 +5,7 @@ class LinearRegression:
 
     def __init__(self):
         self.w = None
+        self.use_bias = None
 
     def fit(self, X: torch.Tensor, y: torch.Tensor, use_bias=True):
         assert isinstance(X, torch.Tensor) and isinstance(y, torch.Tensor), \
@@ -32,6 +33,11 @@ class LinearRegression:
         X = torch.cat([X, torch.ones((batch_size, 1))], dim=-1)
 
         return X
+
+    def evaluate(self, X, y):
+        y_pred = self.predict(X)
+        
+        return torch.sum((y_pred - y)**2) / len(y)
 
 if __name__ == "__main__":
     regressor = LinearRegression()
