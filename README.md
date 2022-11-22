@@ -10,4 +10,4 @@ Here you may find implementations of basic ML algorithms using
 
 - Logistic Regression
     - [Code](https://github.com/auhide/ml-basics-pytorch/blob/main/algos/logistic_regression.py)
-    - [Notebook (with math)](https://github.com/auhide/ml-basics-pytorch/blob/main/algos/logistic_regression.py)
+    - [Notebook (with math)](https://github.com/auhide/ml-basics-pytorch/blob/main/notebooks/Logistic%20Regression.ipynb)

@@ -1,5 +1,5 @@
-from tqdm import tqdm
 import torch
+from tqdm import tqdm
 
 from base import Model
 
@@ -9,9 +9,9 @@ class LogisticRegression(Model):
     def __init__(self):
         self.w = None
 
-    def fit(self, X: torch.Tensor, y: torch.Tensor, l_rate=1e-2, iters=100, random_state=42):
+    def fit(self, X: torch.Tensor, y: torch.Tensor, l_rate=1e-2, iters=100):
         # Defining the weights with random normally distributed values
-        self.w = torch.randn(size=(X.shape[1], 1), requires_grad=True, random_state=random_state)
+        self.w = torch.randn(size=(X.shape[1], 1), requires_grad=True)
 
         # Training for 'iters' iterations
         for _ in tqdm(range(iters)):
