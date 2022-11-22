@@ -36,7 +36,7 @@ class LinearRegression(Model):
 
         return X
 
-    def evaluate(self, X, y):
+    def evaluate(self, X: torch.Tensor, y: torch.Tensor):
         y_pred = self.predict(X)
 
         return torch.sum((y_pred - y)**2) / len(y)
