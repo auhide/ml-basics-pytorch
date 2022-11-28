@@ -1,10 +1,10 @@
 # ML Basics with PyTorch
 
-Here you may find implementations of basic ML algorithms using basic
+Here you may find implementations of ML models using basic
 [PyTorch](https://pytorch.org/) functionality.
 I won't use any predefined loss functions or optimizers.
 
-## Algorithms
+## Models
 - Linear Regression
     - [Code](https://github.com/auhide/ml-basics-pytorch/blob/main/algos/linear_regression.py)
     - [Notebook (with math)](https://github.com/auhide/ml-basics-pytorch/blob/main/notebooks/Linear%20Regression.ipynb)
