@@ -5,6 +5,8 @@ Here you may find implementations of ML models using basic
 I won't use any predefined loss functions or optimizers.
 
 ## Models
+
+### Basic
 - Linear Regression
     - [Code](https://github.com/auhide/ml-basics-pytorch/blob/main/algos/linear_regression.py)
     - [Notebook (with math)](https://github.com/auhide/ml-basics-pytorch/blob/main/notebooks/Linear%20Regression.ipynb)
