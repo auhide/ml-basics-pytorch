@@ -8,13 +8,13 @@ I won't use any predefined loss functions or optimizers.
 
 ### Basic
 - Linear Regression
-    - [Code](https://github.com/auhide/ml-basics-pytorch/blob/main/algos/linear_regression.py)
-    - [Notebook (with math)](https://github.com/auhide/ml-basics-pytorch/blob/main/notebooks/Linear%20Regression.ipynb)
+    - [Code](https://github.com/auhide/ml-basics-pytorch/blob/main/algos/basic/linear_regression.py)
+    - [Notebook (with math)](https://github.com/auhide/ml-basics-pytorch/blob/main/notebooks/basic/Linear%20Regression.ipynb)
 
 - Logistic Regression
-    - [Code](https://github.com/auhide/ml-basics-pytorch/blob/main/algos/logistic_regression.py)
-    - [Notebook (with math)](https://github.com/auhide/ml-basics-pytorch/blob/main/notebooks/Logistic%20Regression.ipynb)
+    - [Code](https://github.com/auhide/ml-basics-pytorch/blob/main/algos/basic/logistic_regression.py)
+    - [Notebook (with math)](https://github.com/auhide/ml-basics-pytorch/blob/main/notebooks/basic/Logistic%20Regression.ipynb)
 
 - Support Vector Machine
-    - [Code](https://github.com/auhide/ml-basics-pytorch/blob/main/algos/svm.py)
+    - [Code](https://github.com/auhide/ml-basics-pytorch/blob/main/algos/basic/svm.py)
     - [Notebook (with math)]()
