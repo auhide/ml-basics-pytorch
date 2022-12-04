@@ -7,14 +7,16 @@ class SupportVectorMachine(Model):
 
     def __init__(self):
         self.w = None
+        self.lambda_ = None
 
     def fit(self, X, y, iters=500, l_rate=1e-1, lambda_=2):
         # Adding a bias column (a column of 1s) to the X tensor.
         X = self._bias_reshape_X(X)
         N_FEATURES = X.shape[-1]
 
+        self.lambda_ = lambda_
         self.w = torch.randn(size=(N_FEATURES, 1), requires_grad=True)
-        
+
         for i in range(iters):
             y_pred = X @ self.w
             loss = self._loss(y_pred, y, lambda_)
@@ -28,12 +30,18 @@ class SupportVectorMachine(Model):
                 print(f"Loss: {loss.item():.2f}")
 
     def predict(self, X):
+        X = self._bias_reshape_X(X)
+        print(X.shape)
+
         return X @ self.w
 
     def evaluate(self, X, y):
+        print(X.shape, self.w.shape)
+        X = self._bias_reshape_X(X)
+
         with torch.no_grad():
             y_pred = X @ self.w
-            loss = self._loss(y_pred, y)
+            loss = self._loss(y_pred, y, self.lambda_)
 
         return loss.item()
 
@@ -60,6 +68,8 @@ class SupportVectorMachine(Model):
 if __name__ == "__main__":
     X = torch.randn(size=(10, 5))
     y = torch.Tensor([-1] * 5 + [1] * 5)
+    print(X.shape)
+    print(y.shape)
 
     svm = SupportVectorMachine()
     svm.fit(X, y)
