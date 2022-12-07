@@ -9,7 +9,7 @@ class SupportVectorMachine(Model):
         self.w = None
         self.lambda_ = None
 
-    def fit(self, X, y, iters=500, l_rate=1e-1, lambda_=2):
+    def fit(self, X, y, iters=500, l_rate=1e-1, lambda_=0.1):
         # Adding a bias column (a column of 1s) to the X tensor.
         X = self._bias_reshape_X(X)
         N_FEATURES = X.shape[-1]
@@ -19,6 +19,7 @@ class SupportVectorMachine(Model):
 
         for i in range(iters):
             y_pred = X @ self.w
+
             loss = self._loss(y_pred, y, lambda_)
             loss.backward()
 
@@ -31,12 +32,10 @@ class SupportVectorMachine(Model):
 
     def predict(self, X):
         X = self._bias_reshape_X(X)
-        print(X.shape)
 
         return X @ self.w
 
     def evaluate(self, X, y):
-        print(X.shape, self.w.shape)
         X = self._bias_reshape_X(X)
 
         with torch.no_grad():
@@ -46,15 +45,15 @@ class SupportVectorMachine(Model):
         return loss.item()
 
     def _loss(self, y_pred, y, lambda_):
-        BATCH_SIZE = y.shape[0]
-        factor = 1 / BATCH_SIZE
+        hinge = self._hinge_loss(y_pred, y).mean()
+        l2_regularization = (self.w ** 2).sum()
 
-        # Computing loss for the soft-margin SVM classifier.
-        loss = (
-            factor * torch.sum(
-                torch.max(torch.Tensor(0), 1 - y @ (y_pred))
-            )
-        ) + lambda_ * torch.linalg.norm(self.w)
+        return lambda_ * hinge + l2_regularization
+
+    def _hinge_loss(self, y_pred, y):
+        indicator_func = y_pred * y
+        loss = 1 - indicator_func
+        loss[loss < 0] = 0
 
         return loss
 
@@ -68,8 +67,11 @@ class SupportVectorMachine(Model):
 if __name__ == "__main__":
     X = torch.randn(size=(10, 5))
     y = torch.Tensor([-1] * 5 + [1] * 5)
-    print(X.shape)
-    print(y.shape)
+    print("X.shape:", X.shape)
+    print("y.shape:", y.shape)
 
     svm = SupportVectorMachine()
     svm.fit(X, y)
+
+    y_pred = svm.predict(X)
+    print("y_pred.shape:", y_pred.shape)
