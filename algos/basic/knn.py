@@ -1,5 +1,3 @@
-from typing import Union
-
 import torch
 
 from base import Model
@@ -18,6 +16,9 @@ class KNearestNeighborsClassifier(Model):
         # weights. The training dataset is used to calculate distances between
         # it and each prediction.
         self.X, self.y = X, y
+        y = y.flatten()
+
+        return self._accuracy(self.predict(X), y)
 
     def predict(self, X: torch.Tensor) -> torch.LongTensor:
         predictions = []
@@ -26,7 +27,7 @@ class KNearestNeighborsClassifier(Model):
             distances = self._calc_norm(vector)
             # The top K smallest distances between the input tensor `vector` and
             # the training dataset tensors.
-            topk_ids = distances.topk(self.k).indices
+            topk_ids = distances.topk(self.k, largest=False).indices
             # Select the classes of the smallest distances.
             topk_classes = torch.index_select(
                 self.y,
@@ -47,14 +48,20 @@ class KNearestNeighborsClassifier(Model):
         
         return accuracy
 
-    def _calc_norm(self, X: torch.Tensor) -> torch.Tensor:
-        metric_type = "fro" if self.metric == "l2" else "1"
-        distances = (X - self.X).norm(p=metric_type, dim=1)
+    def _calc_norm(self, vector: torch.Tensor) -> torch.Tensor:
+        if self.metric == "l2":
+            # Calculating Euclidean norm.
+            distances = (vector - self.X).norm(p="fro", dim=1)
+        else:
+            # Calculating Manhattan norm.
+            distances = (vector - self.X).abs().sum(dim=1)
 
         return distances
     
-    def _accuracy(self, y_pred: torch.LongTensor, y: torch.LongTensor):
-        return (y_pred == y).int().count_nonzero() / len(y)
+    def _accuracy(self, y_pred: torch.LongTensor, y: torch.LongTensor) -> float:
+        matches = (y_pred == y).int()
+
+        return float(matches.count_nonzero() / len(y))
 
 
 if __name__ == "__main__":

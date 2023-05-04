@@ -1,7 +1,7 @@
 # ML Basics with PyTorch
 
 Here you may find implementations of ML models using basic
-[PyTorch](https://pytorch.org/) functionality.
+[PyTorch](https://pytorch.org/) functionalities.
 I won't use any predefined loss functions or optimizers.
 
 ## Models
