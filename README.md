@@ -18,3 +18,7 @@ I won't use any predefined loss functions or optimizers.
 - Support Vector Machine
     - [Code](https://github.com/auhide/ml-basics-pytorch/blob/main/algos/basic/svm.py)
     - [Notebook (with math)](https://github.com/auhide/ml-basics-pytorch/blob/main/notebooks/basic/Support%20Vector%20Machine.ipynb)
+
+- K-Nearest Neighbors Classifier
+    - [Code](https://github.com/auhide/ml-basics-pytorch/blob/main/algos/basic/knn.py)
+    - [Notebook (with math)](https://github.com/auhide/ml-basics-pytorch/blob/main/notebooks/basic/K-Nearest%20Neighbors.ipynb)
